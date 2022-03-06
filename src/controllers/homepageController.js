@@ -4,9 +4,9 @@ import request from "request";
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-let getHomepage = (req, res) => {
-    return res.render("homepage.ejs");
-};
+// let getHomepage = (req, res) => {
+//     return res.render("homepage.ejs");
+// };
 
 let getWebhook = (req, res) => {
 
@@ -165,7 +165,7 @@ let callSendAPI = (sender_psid, response) => {
         }
     });
 };
-let handleSetupInfor = (req,res)=>{
+let handleSetupInfor =async (req,res)=>{
     //call fb api
 
      // Send the HTTP request to the Messenger Platform
@@ -196,7 +196,7 @@ let handleSetupInfor = (req,res)=>{
             ]
           
     }
-    return new Promise(async(resolve,reject)=>{
+    return new Promise((resolve,reject)=>{
         try{
             request({
                 "uri": "https://graph.facebook.com/v13.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>",
