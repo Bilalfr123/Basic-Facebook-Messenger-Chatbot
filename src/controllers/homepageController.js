@@ -4,9 +4,9 @@ import request from "request";
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 
-// let getHomepage = (req, res) => {
-//     return res.render("homepage.ejs");
-// };
+let getHomepage = (req, res) => {
+    return res.render("homepage.ejs");
+};
 
 let getWebhook = (req, res) => {
 
