@@ -160,8 +160,58 @@ let callSendAPI = (sender_psid, response) => {
         }
     });
 };
+let handleSetupInfor = (req,res)=>{
+    //call fb api
+
+     // Send the HTTP request to the Messenger Platform
+    let request_body ={
+        
+            "get_started":{
+              "payload":"<GET_STARTED_PAYLOAD>"
+            },  "persistent_menu": [
+                {
+                    "locale": "default",
+                    "composer_input_disabled": false,
+                    "call_to_actions": [
+                       
+                        {
+                            "type": "web_url",
+                            "title": "Shop now",
+                            "url": "https://www.youtube.com/watch?v=Ss08EVcanTI&list=PLNOjHC_BXrfBqKPYm3S2onW0XFvCnVIeU&index=32",
+                            "webview_height_ratio": "full"
+                        }
+                    ]
+                }
+            ]
+          
+    }
+    return new Promise(async(resolve,reject)=>{
+        try{
+            request({
+                "uri": "https://graph.facebook.com/v13.0/me/messenger_profile?access_token=<PAGE_ACCESS_TOKEN>",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, (err, response, body) => {
+                console.log(`----------------------------------`)
+                console.log(`LOgs setup persistent menu and get started button: `, response)
+                console.log(`----------------------------------`)
+                if (!err) {
+                    return res.send("setup done!")
+                } else {
+                    return res.send("Something went wrong with server please check logs....")
+                }
+            });
+        }catch(e){
+            reject(e)
+        }
+    })
+  
+
+}
 module.exports = {
     getHomepage: getHomepage,
     getWebhook: getWebhook,
-    postWebhook: postWebhook
+    postWebhook: postWebhook.apply,
+    handleSetupInfor:handleSetupInfor
 };
