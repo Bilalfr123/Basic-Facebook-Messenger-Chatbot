@@ -153,6 +153,8 @@ let callSendAPI = (sender_psid, response) => {
         "method": "POST",
         "json": request_body
     }, (err, res, body) => {
+        console.log(res)
+        console.log(`11111111111111111111111111111111111111111`)
         if (!err) {
             console.log('message sent!')
         } else {
